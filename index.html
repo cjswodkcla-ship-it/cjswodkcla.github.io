@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>초량지구대 - 시작 페이지</title>
+  <meta name="description" content="부산동부경찰서 초량지구대 시작 홈페이지 (실시간 서울/부산 날씨, 구글 검색, 오늘의 명언)">
+  <!-- Google Fonts: Roboto & Noto Sans KR -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons for modern aesthetic UI -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="top-nav">
+    <div class="nav-left">
+      <!-- Live Clock & Date -->
+      <div class="clock-widget" id="clockWidget" title="현재 시각">
+        <span class="time-display" id="timeDisplay">00:00:00</span>
+        <span class="date-display" id="dateDisplay">2026년 9월 3일 (목)</span>
+      </div>
+
+      <!-- Seoul & Busan Weather Widget -->
+      <div class="weather-container" id="weatherWidget">
+        <div class="weather-tabs">
+          <button class="weather-tab active" data-city="seoul" id="tabSeoul">
+            <i class="fa-solid fa-location-dot"></i> 서울
+          </button>
+          <button class="weather-tab" data-city="busan" id="tabBusan">
+            <i class="fa-solid fa-location-dot"></i> 부산
+          </button>
+        </div>
+
+        <!-- Seoul Weather Card -->
+        <div class="weather-card active" id="weatherSeoul">
+          <div class="weather-main">
+            <div class="weather-icon-wrap" id="seoulIcon">
+              <i class="fa-solid fa-sun weather-icon icon-sun"></i>
+            </div>
+            <div class="weather-temp-wrap">
+              <span class="weather-temp" id="seoulTemp">--°C</span>
+              <span class="weather-desc" id="seoulDesc">날씨 불러오는 중...</span>
+            </div>
+          </div>
+          <div class="weather-details">
+            <span class="detail-item"><i class="fa-solid fa-arrow-up"></i> <span id="seoulMax">--°</span></span>
+            <span class="detail-item"><i class="fa-solid fa-arrow-down"></i> <span id="seoulMin">--°</span></span>
+            <span class="detail-item"><i class="fa-solid fa-droplet"></i> <span id="seoulHumidity">--%</span></span>
+          </div>
+        </div>
+
+        <!-- Busan Weather Card -->
+        <div class="weather-card" id="weatherBusan">
+          <div class="weather-main">
+            <div class="weather-icon-wrap" id="busanIcon">
+              <i class="fa-solid fa-sun weather-icon icon-sun"></i>
+            </div>
+            <div class="weather-temp-wrap">
+              <span class="weather-temp" id="busanTemp">--°C</span>
+              <span class="weather-desc" id="busanDesc">날씨 불러오는 중...</span>
+            </div>
+          </div>
+          <div class="weather-details">
+            <span class="detail-item"><i class="fa-solid fa-arrow-up"></i> <span id="busanMax">--°</span></span>
+            <span class="detail-item"><i class="fa-solid fa-arrow-down"></i> <span id="busanMin">--°</span></span>
+            <span class="detail-item"><i class="fa-solid fa-droplet"></i> <span id="busanHumidity">--%</span></span>
+          </div>
+        </div>
+
+        <!-- Weather Refresh Button -->
+        <button class="icon-btn-mini weather-refresh-btn" id="refreshWeatherBtn" title="날씨 새로고침">
+          <i class="fa-solid fa-rotate-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav-right">
+      <a href="https://mail.google.com" target="_blank" class="nav-link" rel="noreferrer">Gmail</a>
+      <a href="https://www.google.com/imghp" target="_blank" class="nav-link" rel="noreferrer">이미지</a>
+      
+      <!-- Dark/Light Theme Toggle -->
+      <button class="icon-btn theme-toggle-btn" id="themeToggleBtn" title="테마 전환" aria-label="테마 전환">
+        <i class="fa-solid fa-moon" id="themeIcon"></i>
+      </button>
+
+      <!-- Google Apps Grid Icon -->
+      <button class="icon-btn app-grid-btn" id="appGridBtn" title="Google 앱" aria-label="Google 앱">
+        <i class="fa-solid fa-grip"></i>
+      </button>
+
+      <!-- Profile Avatar -->
+      <div class="profile-avatar" title="사용자 계정">
+        <span>S</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Google Apps Dropdown Menu -->
+  <div class="apps-dropdown" id="appsDropdown">
+    <div class="apps-grid">
+      <a href="https://www.google.com/account/about/" target="_blank" class="app-item" rel="noreferrer">
+        <i class="fa-solid fa-circle-user app-icon" style="color: #4285F4;"></i>
+        <span>계정</span>
+      </a>
+      <a href="https://www.google.com" target="_blank" class="app-item" rel="noreferrer">
+        <i class="fa-brands fa-google app-icon" style="color: #EA4335;"></i>
+        <span>검색</span>
+      </a>
+      <a href="https://maps.google.com" target="_blank" class="app-item" rel="noreferrer">
+        <i class="fa-solid fa-map-location-dot app-icon" style="color: #34A853;"></i>
+        <span>지도</span>
+      </a>
+      <a href="https://www.youtube.com" target="_blank" class="app-item" rel="noreferrer">
+        <i class="fa-brands fa-youtube app-icon" style="color: #FF0000;"></i>
+        <span>YouTube</span>
+      </a>
+      <a href="https://news.google.com" target="_blank" class="app-item" rel="noreferrer">
+        <i class="fa-solid fa-newspaper app-icon" style="color: #4285F4;"></i>
+        <span>뉴스</span>
+      </a>
+      <a href="https://mail.google.com" target="_blank" class="app-item" rel="noreferrer">
+        <i class="fa-solid fa-envelope app-icon" style="color: #EA4335;"></i>
+        <span>Gmail</span>
+      </a>
+      <a href="https://drive.google.com" target="_blank" class="app-item" rel="noreferrer">
+        <i class="fa-brands fa-google-drive app-icon" style="color: #FBBC05;"></i>
+        <span>드라이브</span>
+      </a>
+      <a href="https://calendar.google.com" target="_blank" class="app-item" rel="noreferrer">
+        <i class="fa-regular fa-calendar-days app-icon" style="color: #4285F4;"></i>
+        <span>캘린더</span>
+      </a>
+      <a href="https://translate.google.com" target="_blank" class="app-item" rel="noreferrer">
+        <i class="fa-solid fa-language app-icon" style="color: #4285F4;"></i>
+        <span>번역</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Content Center Area -->
+  <main class="main-container">
+    <!-- 초량지구대 Logo Emblem Section -->
+    <div class="police-logo-container">
+      <div class="police-emblem-wrap">
+        <svg class="police-emblem-svg" viewBox="0 0 200 200" width="130" height="130" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#143058" />
+              <stop offset="50%" stop-color="#0c203d" />
+              <stop offset="100%" stop-color="#061224" />
+            </linearGradient>
+            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFF3B0" />
+              <stop offset="35%" stop-color="#E8B837" />
+              <stop offset="70%" stop-color="#C68A1E" />
+              <stop offset="100%" stop-color="#99630D" />
+            </linearGradient>
+            <linearGradient id="silverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFFFFF" />
+              <stop offset="100%" stop-color="#C0C7D2" />
+            </linearGradient>
+            <linearGradient id="taegeukRed" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#EA4335" />
+              <stop offset="100%" stop-color="#C5221F" />
+            </linearGradient>
+            <linearGradient id="taegeukBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#4285F4" />
+              <stop offset="100%" stop-color="#1A73E8" />
+            </linearGradient>
+            <filter id="badgeShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.25"/>
+            </filter>
+          </defs>
+
+          <!-- Outer Shield / Circle -->
+          <circle cx="100" cy="100" r="92" fill="url(#shieldGrad)" stroke="url(#goldGrad)" stroke-width="4" filter="url(#badgeShadow)"/>
+          <circle cx="100" cy="100" r="84" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.8"/>
+          
+          <!-- Outer Ring Accent Points -->
+          <circle cx="100" cy="18" r="3" fill="url(#goldGrad)"/>
+          <circle cx="100" cy="182" r="3" fill="url(#goldGrad)"/>
+          <circle cx="18" cy="100" r="3" fill="url(#goldGrad)"/>
+          <circle cx="182" cy="100" r="3" fill="url(#goldGrad)"/>
+
+          <!-- Eagle Wing Left -->
+          <path d="M100,85 C80,50 38,55 30,78 C42,88 56,96 74,99 C58,103 44,112 36,122 C52,123 68,118 84,110 C70,118 58,130 54,142 C72,138 88,126 100,114 Z" fill="url(#goldGrad)" />
+          
+          <!-- Eagle Wing Right -->
+          <path d="M100,85 C120,50 162,55 170,78 C158,88 144,96 126,99 C142,103 156,112 164,122 C148,123 132,118 116,110 C130,118 142,130 146,142 C128,138 112,126 100,114 Z" fill="url(#goldGrad)" />
+
+          <!-- Eagle Head & Neck -->
+          <path d="M100,52 C94,52 89,58 92,66 C93,69 91,72 88,74 C93,76 96,79 96,84 L104,84 C104,79 107,76 112,74 C109,72 107,69 108,66 C111,58 106,52 100,52 Z" fill="url(#silverGrad)"/>
+          <!-- Eagle Beak -->
+          <path d="M100,64 L96,69 L104,69 Z" fill="#FFA500"/>
+          
+          <!-- Mugunghwa / Star Emblem -->
+          <path d="M100,90 L104,98 L113,99 L106,105 L108,114 L100,109 L92,114 L94,105 L87,99 L96,98 Z" fill="url(#goldGrad)" stroke="#8A5A00" stroke-width="0.5"/>
+
+          <!-- Center Taegeuk (Yin-Yang) -->
+          <circle cx="100" cy="100" r="12" fill="url(#taegeukRed)"/>
+          <path d="M100,88 A6,6 0 0,1 100,100 A6,6 0 0,0 100,112 A12,12 0 0,0 100,88 Z" fill="url(#taegeukBlue)"/>
+
+          <!-- Laurel Wreath Bottom -->
+          <path d="M58,148 C70,166 100,172 100,172 C100,172 130,166 142,148" fill="none" stroke="url(#goldGrad)" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <div class="police-title-group">
+        <span class="police-sub-agency">부산동부경찰서</span>
+        <h1 class="police-main-name">초량지구대</h1>
+        <span class="police-eng-name">CHORYANG POLICE STATION</span>
+      </div>
+    </div>
+
+    <!-- Google Search Box -->
+    <form class="search-form" id="searchForm" action="https://www.google.com/search" method="GET">
+      <div class="search-bar" id="searchBar">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input 
+          type="text" 
+          name="q" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="Google에서 검색하거나 URL을 입력하세요" 
+          autocomplete="off" 
+          autofocus
+          aria-label="Google 검색 입력"
+        />
+        <button type="button" class="search-btn-clear" id="clearBtn" title="입력 내용 지우기" style="display: none;">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <button type="button" class="search-tool-btn" id="voiceSearchBtn" title="음성 검색" aria-label="음성 검색">
+          <i class="fa-solid fa-microphone"></i>
+        </button>
+        <button type="button" class="search-tool-btn" id="lensBtn" title="이미지로 검색" aria-label="이미지로 검색">
+          <i class="fa-solid fa-camera"></i>
+        </button>
+      </div>
+
+      <!-- Search Suggestions / Recent Searches Dropdown -->
+      <div class="search-dropdown" id="searchDropdown" style="display: none;">
+        <div class="dropdown-header">
+          <span><i class="fa-regular fa-clock"></i> 최근 검색어</span>
+          <button type="button" class="clear-history-btn" id="clearHistoryBtn">기록 삭제</button>
+        </div>
+        <ul class="recent-list" id="recentList">
+          <!-- Recent search items injected here -->
+        </ul>
+      </div>
+
+      <!-- Google Search Action Buttons -->
+      <div class="search-buttons">
+        <button type="submit" class="btn-search" id="btnGoogleSearch">Google 검색</button>
+        <button type="button" class="btn-search" id="btnFeelingLucky">I'm Feeling Lucky</button>
+      </div>
+    </form>
+
+    <!-- Minimalist Quote Widget (간결한 오늘의 명언) -->
+    <div class="quote-compact" id="quoteSection" aria-label="오늘의 명언">
+      <div class="quote-content" id="quoteWrapper">
+        <i class="fa-solid fa-quote-left quote-icon-decor"></i>
+        <span class="quote-text" id="quoteText">"성공은 매일 반복되는 작은 노력들의 합이다."</span>
+        <span class="quote-author" id="quoteAuthor">- 로버트 콜리어</span>
+      </div>
+      <div class="quote-actions">
+        <button class="quote-icon-btn" id="refreshQuoteBtn" title="새로운 명언 보기" aria-label="새로운 명언">
+          <i class="fa-solid fa-arrows-rotate"></i>
+        </button>
+        <button class="quote-icon-btn" id="copyQuoteBtn" title="명언 복사하기" aria-label="명언 복사">
+          <i class="fa-regular fa-copy"></i>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Toast Notification -->
+  <div class="toast-container" id="toast">
+    <i class="fa-solid fa-circle-check toast-icon"></i>
+    <span id="toastMessage">메시지</span>
+  </div>
+
+  <!-- Google Style Footer -->
+  <footer class="google-footer">
+    <div class="footer-top">
+      <span>대한민국</span>
+      <span class="footer-location-sub">• 날씨 정보: Open-Meteo 실시간 기상관측망</span>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-left">
+        <a href="https://about.google/" target="_blank" rel="noreferrer">Google 정보</a>
+        <a href="https://ads.google.com" target="_blank" rel="noreferrer">광고</a>
+        <a href="https://www.google.com/services/" target="_blank" rel="noreferrer">비즈니스</a>
+        <a href="https://google.com/search/howsearchworks/" target="_blank" rel="noreferrer">검색의 원리</a>
+      </div>
+      <div class="footer-right">
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">개인정보처리방침</a>
+        <a href="https://policies.google.com/terms" target="_blank" rel="noreferrer">약관</a>
+        <span class="footer-copy">VibeCoding Project 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
